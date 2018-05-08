@@ -52,3 +52,4 @@ memprofile.log
 
 #testnet
 testnet/conf/network.key
+keydir
