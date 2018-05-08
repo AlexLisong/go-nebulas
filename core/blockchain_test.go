@@ -21,10 +21,10 @@ package core
 import (
 	"testing"
 
-	"github.com/nebulasio/go-nebulas/crypto"
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
-	"github.com/nebulasio/go-nebulas/crypto/keystore/secp256k1"
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/crypto"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/crypto/keystore/secp256k1"
+	"github.com/alexlisong/go-nebulas/util"
 
 	"sync"
 	"time"

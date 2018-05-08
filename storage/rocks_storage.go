@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 	"github.com/tecbot/gorocksdb"
 )

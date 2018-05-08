@@ -23,9 +23,9 @@ import (
 
 	"os"
 
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/util"
 	"github.com/stretchr/testify/assert"
 )
 

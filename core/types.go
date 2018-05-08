@@ -22,20 +22,20 @@ import (
 	"errors"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
 
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 
-	"github.com/nebulasio/go-nebulas/core/state"
-	"github.com/nebulasio/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/core/state"
+	"github.com/alexlisong/go-nebulas/net"
 
 	"regexp"
 
-	"github.com/nebulasio/go-nebulas/consensus/pb"
-	"github.com/nebulasio/go-nebulas/core/pb"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	"github.com/nebulasio/go-nebulas/storage"
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/consensus/pb"
+	"github.com/alexlisong/go-nebulas/core/pb"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/util"
 )
 
 // Payload Types
@@ -247,7 +247,6 @@ type AccountManager interface {
 // NVM interface
 type NVM interface {
 	CreateEngine(block *Block, tx *Transaction, contract state.Account, ws WorldState) (SmartContractEngine, error)
-	CheckV8Run() error
 }
 
 // SmartContractEngine interface

@@ -18,7 +18,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 )
 
 //type value interface{}

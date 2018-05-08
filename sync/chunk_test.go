@@ -21,18 +21,18 @@ package sync
 import (
 	"time"
 
-	"github.com/nebulasio/go-nebulas/nf/nvm"
+	"github.com/alexlisong/go-nebulas/nf/nvm"
 
-	"github.com/nebulasio/go-nebulas/account"
-	"github.com/nebulasio/go-nebulas/consensus/dpos"
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/account"
+	"github.com/alexlisong/go-nebulas/consensus/dpos"
+	"github.com/alexlisong/go-nebulas/util"
 
 	"github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/core/pb"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	"github.com/nebulasio/go-nebulas/net"
-	"github.com/nebulasio/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/core/pb"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/storage"
 	"github.com/stretchr/testify/assert"
 
 	"testing"

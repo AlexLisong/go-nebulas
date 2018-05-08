@@ -22,8 +22,8 @@ package corepb
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import dagpb "github.com/nebulasio/go-nebulas/common/dag/pb"
-import consensuspb "github.com/nebulasio/go-nebulas/consensus/pb"
+import dagpb "github.com/alexlisong/go-nebulas/common/dag/pb"
+import consensuspb "github.com/alexlisong/go-nebulas/consensus/pb"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

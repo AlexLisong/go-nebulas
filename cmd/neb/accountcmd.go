@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/nebulasio/go-nebulas/cmd/console"
-	"github.com/nebulasio/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/cmd/console"
+	"github.com/alexlisong/go-nebulas/core"
 	"github.com/urfave/cli"
 )
 

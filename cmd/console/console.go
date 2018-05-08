@@ -29,8 +29,8 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/nebulasio/go-nebulas/cmd/console/library"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/cmd/console/library"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
 	"github.com/peterh/liner"
 )
 

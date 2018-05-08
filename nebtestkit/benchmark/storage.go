@@ -24,9 +24,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/common/trie"
-	"github.com/nebulasio/go-nebulas/storage"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/common/trie"
+	"github.com/alexlisong/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 )
 
 func main() {

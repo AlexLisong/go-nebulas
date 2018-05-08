@@ -22,7 +22,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 )
 
 func TestScrypt_Encrypt(t *testing.T) {

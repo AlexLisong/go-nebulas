@@ -19,7 +19,7 @@
 package rpc
 
 import (
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

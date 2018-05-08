@@ -26,8 +26,8 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/util/logging"
 )
 
 // all error should in only file

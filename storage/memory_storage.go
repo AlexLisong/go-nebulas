@@ -21,7 +21,7 @@ package storage
 import (
 	"sync"
 
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 )
 
 // MemoryStorage the nodes in trie.

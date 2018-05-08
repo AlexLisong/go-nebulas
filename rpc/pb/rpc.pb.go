@@ -55,8 +55,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "google.golang.org/genproto/googleapis/api/annotations"
-import consensuspb "github.com/nebulasio/go-nebulas/consensus/pb"
-import nebletpb "github.com/nebulasio/go-nebulas/neblet/pb"
+import consensuspb "github.com/alexlisong/go-nebulas/consensus/pb"
+import nebletpb "github.com/alexlisong/go-nebulas/neblet/pb"
 
 import (
 	context "golang.org/x/net/context"

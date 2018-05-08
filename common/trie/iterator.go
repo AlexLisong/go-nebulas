@@ -21,7 +21,7 @@ package trie
 import (
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/crypto/hash"
+	"github.com/alexlisong/go-nebulas/crypto/hash"
 )
 
 // errors constants

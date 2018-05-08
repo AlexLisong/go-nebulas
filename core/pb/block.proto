@@ -17,8 +17,8 @@
 //
 syntax = "proto3";
 
-import "github.com/nebulasio/go-nebulas/common/dag/pb/dag.proto";
-import "github.com/nebulasio/go-nebulas/consensus/pb/state.proto";
+import "github.com/alexlisong/go-nebulas/common/dag/pb/dag.proto";
+import "github.com/alexlisong/go-nebulas/consensus/pb/state.proto";
 
 package corepb;
 

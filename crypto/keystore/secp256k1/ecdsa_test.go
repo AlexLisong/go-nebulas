@@ -25,8 +25,8 @@ import (
 	"crypto/rand"
 	"io"
 
-	"github.com/nebulasio/go-nebulas/crypto/hash"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/crypto/hash"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 	"github.com/stretchr/testify/assert"
 )
 

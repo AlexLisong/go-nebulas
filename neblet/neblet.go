@@ -15,22 +15,21 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/nebulasio/go-nebulas/cmd/console"
+	"github.com/alexlisong/go-nebulas/cmd/console"
 
 	"net"
 
-	"github.com/nebulasio/go-nebulas/account"
-	"github.com/nebulasio/go-nebulas/consensus/dpos"
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/core/pb"
-	"github.com/nebulasio/go-nebulas/metrics"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	nebnet "github.com/nebulasio/go-nebulas/net"
-	"github.com/nebulasio/go-nebulas/nf/nvm"
-	"github.com/nebulasio/go-nebulas/rpc"
-	"github.com/nebulasio/go-nebulas/storage"
-	nsync "github.com/nebulasio/go-nebulas/sync"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/account"
+	"github.com/alexlisong/go-nebulas/consensus/dpos"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/core/pb"
+	"github.com/alexlisong/go-nebulas/metrics"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	nebnet "github.com/alexlisong/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/rpc"
+	"github.com/alexlisong/go-nebulas/storage"
+	nsync "github.com/alexlisong/go-nebulas/sync"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	m "github.com/rcrowley/go-metrics"
 )
 
@@ -130,13 +129,6 @@ func (n *Neblet) Setup() {
 		}).Fatal("Failed to setup net service.")
 	}
 
-	// nvm
-	n.nvm = nvm.NewNebulasVM()
-	if err = n.nvm.CheckV8Run(); err != nil {
-		logging.CLog().WithFields(logrus.Fields{
-			"err": err,
-		}).Fatal("Failed to setup V8.")
-	}
 	// core
 	n.eventEmitter = core.NewEventEmitter(40960)
 	n.consensus = dpos.NewDpos()

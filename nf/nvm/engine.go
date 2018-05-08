@@ -19,8 +19,8 @@
 package nvm
 
 import (
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/core/state"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/core/state"
 )
 
 // NebulasVM type of NebulasVM

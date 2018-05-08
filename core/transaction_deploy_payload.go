@@ -22,7 +22,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/util"
 )
 
 // DeployPayload carry contract deploy information

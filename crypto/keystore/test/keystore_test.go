@@ -23,8 +23,8 @@ import (
 
 	"time"
 
-	"github.com/nebulasio/go-nebulas/crypto"
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/crypto"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
 	"github.com/stretchr/testify/assert"
 )
 

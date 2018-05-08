@@ -21,7 +21,7 @@ package sync
 import (
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/metrics"
+	"github.com/alexlisong/go-nebulas/metrics"
 )
 
 // Error Types

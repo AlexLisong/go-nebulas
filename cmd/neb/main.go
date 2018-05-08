@@ -27,8 +27,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/neblet"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/neblet"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/urfave/cli"
 )
 

@@ -31,7 +31,7 @@ import (
 	swarm "github.com/libp2p/go-libp2p-swarm"
 	"github.com/libp2p/go-libp2p/p2p/host/basic"
 	multiaddr "github.com/multiformats/go-multiaddr"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

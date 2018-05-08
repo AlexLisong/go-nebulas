@@ -22,9 +22,9 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/nebulasio/go-nebulas/rpc/mock_pb"
-	"github.com/nebulasio/go-nebulas/rpc/pb"
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/rpc/mock_pb"
+	"github.com/alexlisong/go-nebulas/rpc/pb"
+	"github.com/alexlisong/go-nebulas/util"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 )

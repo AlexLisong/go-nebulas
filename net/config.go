@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"github.com/multiformats/go-multiaddr"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
 )
 
 // const

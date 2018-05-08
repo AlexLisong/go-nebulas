@@ -22,8 +22,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/nebulasio/go-nebulas/metrics"
-	"github.com/nebulasio/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/metrics"
+	"github.com/alexlisong/go-nebulas/storage"
 )
 
 // Errors

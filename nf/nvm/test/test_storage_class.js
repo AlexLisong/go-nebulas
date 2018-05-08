@@ -30,7 +30,7 @@ try {
     // pass.
 }
 
-// disable gcs according to https://github.com/nebulasio/go-nebulas/issues/23
+// disable gcs according to https://github.com/alexlisong/go-nebulas/issues/23
 var _e = new Error('_native_storage_handlers.gcs should be disabled.');
 try {
     _native_storage_handlers.gcs.put('k1', 'v1');

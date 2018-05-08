@@ -3,11 +3,11 @@ package nvm
 import (
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/core/state"
-	"github.com/nebulasio/go-nebulas/storage"
-	"github.com/nebulasio/go-nebulas/util"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/core/state"
+	"github.com/alexlisong/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 )
 
 // Error Types

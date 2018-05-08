@@ -21,7 +21,7 @@ package net
 import (
 	"fmt"
 
-	metrics "github.com/nebulasio/go-nebulas/metrics"
+	metrics "github.com/alexlisong/go-nebulas/metrics"
 )
 
 // Metrics map for different in/out network msg types

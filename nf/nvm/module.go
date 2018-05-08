@@ -26,7 +26,7 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

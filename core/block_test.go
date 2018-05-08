@@ -23,19 +23,19 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/common/dag"
-	"github.com/nebulasio/go-nebulas/consensus/pb"
-	"github.com/nebulasio/go-nebulas/core/state"
-	"github.com/nebulasio/go-nebulas/net"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/common/dag"
+	"github.com/alexlisong/go-nebulas/consensus/pb"
+	"github.com/alexlisong/go-nebulas/core/state"
+	"github.com/alexlisong/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 
+	"github.com/alexlisong/go-nebulas/core/pb"
+	"github.com/alexlisong/go-nebulas/crypto"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/util"
 	pb "github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/core/pb"
-	"github.com/nebulasio/go-nebulas/crypto"
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	"github.com/nebulasio/go-nebulas/storage"
-	"github.com/nebulasio/go-nebulas/util"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -319,9 +319,6 @@ type mockEngine struct{}
 
 func (nvm *mockNvm) CreateEngine(block *Block, tx *Transaction, contract state.Account, state WorldState) (SmartContractEngine, error) {
 	return &mockEngine{}, nil
-}
-func (nvm *mockNvm) CheckV8Run() error {
-	return nil
 }
 
 func (nvm *mockEngine) Dispose() {

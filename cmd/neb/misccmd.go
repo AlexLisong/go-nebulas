@@ -23,7 +23,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/nebulasio/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/net"
 	"github.com/urfave/cli"
 )
 

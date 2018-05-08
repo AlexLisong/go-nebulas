@@ -21,16 +21,16 @@ package dpos
 import (
 	"testing"
 
-	"github.com/nebulasio/go-nebulas/consensus/pb"
+	"github.com/alexlisong/go-nebulas/consensus/pb"
 
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/crypto/keystore"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/nebulasio/go-nebulas/common/trie"
-	"github.com/nebulasio/go-nebulas/storage"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/common/trie"
+	"github.com/alexlisong/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 )
 
 func checkDynasty(t *testing.T, consensus core.Consensus, consensusRoot *consensuspb.ConsensusRoot, storage storage.Storage) {

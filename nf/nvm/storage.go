@@ -25,8 +25,8 @@ import (
 	"regexp"
 	"unsafe"
 
-	"github.com/nebulasio/go-nebulas/common/trie"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/common/trie"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

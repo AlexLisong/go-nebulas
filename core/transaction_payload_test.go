@@ -21,7 +21,7 @@ package core
 import (
 	"testing"
 
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/util"
 	"github.com/stretchr/testify/assert"
 )
 

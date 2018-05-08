@@ -23,7 +23,7 @@ import (
 
 	"sync"
 
-	"github.com/nebulasio/go-nebulas/crypto/cipher"
+	"github.com/alexlisong/go-nebulas/crypto/cipher"
 )
 
 var (

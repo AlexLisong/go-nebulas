@@ -143,7 +143,7 @@ function deployContract() {
         console.log("lastnonce:", lastnonce);
 
         // create contract
-        var bank = FS.readFileSync("/neb/golang/src/github.com/nebulasio/go-nebulas/nf/nvm/test/bank_vault_contract.js", "utf-8");
+        var bank = FS.readFileSync("/neb/golang/src/github.com/alexlisong/go-nebulas/nf/nvm/test/bank_vault_contract.js", "utf-8");
         var contract = {
             "source": bank,
             "sourceType": "js",

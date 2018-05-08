@@ -20,7 +20,7 @@
 package rpc
 
 import (
-	"github.com/nebulasio/go-nebulas/metrics"
+	"github.com/alexlisong/go-nebulas/metrics"
 )
 
 // Metrics for rpc

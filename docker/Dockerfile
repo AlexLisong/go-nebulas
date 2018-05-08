@@ -19,7 +19,7 @@ RUN cd ${ROCKSDB_SRC} && \
     make shared_lib && \
     make install-shared
 
-ENV NEBULAS_SRC=${GOPATH}/src/github.com/nebulasio/go-nebulas
+ENV NEBULAS_SRC=${GOPATH}/src/github.com/alexlisong/go-nebulas
 WORKDIR ${NEBULAS_SRC}
 
 RUN go get -u github.com/golang/dep/cmd/dep && \

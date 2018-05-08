@@ -22,8 +22,8 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/nebulasio/go-nebulas/core/state"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/core/state"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

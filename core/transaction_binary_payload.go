@@ -19,7 +19,7 @@
 package core
 
 import (
-	"github.com/nebulasio/go-nebulas/util"
+	"github.com/alexlisong/go-nebulas/util"
 )
 
 // BinaryPayload carry some data

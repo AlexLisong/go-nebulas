@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/core/pb"
-	"github.com/nebulasio/go-nebulas/neblet/pb"
-	"github.com/nebulasio/go-nebulas/net"
-	"github.com/nebulasio/go-nebulas/rpc"
-	"github.com/nebulasio/go-nebulas/storage"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/core/pb"
+	"github.com/alexlisong/go-nebulas/neblet/pb"
+	"github.com/alexlisong/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/rpc"
+	"github.com/alexlisong/go-nebulas/storage"
 	"github.com/stretchr/testify/assert"
 )
 

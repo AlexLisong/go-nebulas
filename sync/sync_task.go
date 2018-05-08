@@ -26,13 +26,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"github.com/alexlisong/go-nebulas/util/byteutils"
 
 	"github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/core"
-	"github.com/nebulasio/go-nebulas/net"
-	"github.com/nebulasio/go-nebulas/sync/pb"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/core"
+	"github.com/alexlisong/go-nebulas/net"
+	"github.com/alexlisong/go-nebulas/sync/pb"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

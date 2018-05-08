@@ -26,8 +26,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/crypto/hash"
-	"github.com/nebulasio/go-nebulas/crypto/utils"
+	"github.com/alexlisong/go-nebulas/crypto/hash"
+	"github.com/alexlisong/go-nebulas/crypto/utils"
 	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/scrypt"
 )

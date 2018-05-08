@@ -20,7 +20,7 @@ package netpb
 
 import (
 	"github.com/gogo/protobuf/proto"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 

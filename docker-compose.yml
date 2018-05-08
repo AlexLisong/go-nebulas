@@ -13,7 +13,7 @@ services:
       - '8888:8888'
       - '8086:8086'
     volumes:
-      - .:/go/src/github.com/nebulasio/go-nebulas
+      - .:/go/src/github.com/alexlisong/go-nebulas
     environment:
       - TZ=Asia/Shanghai
       - NEBULAS_BRANCH=master

@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 	"google.golang.org/grpc"
 )
 

@@ -596,12 +596,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/vrischmann/go-metrics-influxdb"
-  packages = ["."]
-  revision = "43af8332c303f62ef62663b02b3b7d8a9802002a"
-
-[[projects]]
-  branch = "master"
   name = "github.com/whyrusleeping/go-logging"
   packages = ["."]
   revision = "0457bb6b88fc1973573aaf6b5145d8d3ae972390"
@@ -792,6 +786,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3cbb9060c41566687af55087832faa959bbf5e39cb4349bb1de287051e43b585"
+  inputs-digest = "12562db98440c65bbc4cb7c3b82e57491f140e396b853ba7c5e66f8611fc6a9d"
   solver-name = "gps-cdcl"
   solver-version = 1

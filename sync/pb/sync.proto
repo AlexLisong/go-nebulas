@@ -18,7 +18,7 @@
 
 syntax = "proto3";
 
-import "github.com/nebulasio/go-nebulas/core/pb/block.proto";
+import "github.com/alexlisong/go-nebulas/core/pb/block.proto";
 
 package syncpb;
 

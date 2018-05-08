@@ -32,7 +32,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 	libnet "github.com/libp2p/go-libp2p-net"
 	peer "github.com/libp2p/go-libp2p-peer"
-	"github.com/nebulasio/go-nebulas/util/logging"
+	"github.com/alexlisong/go-nebulas/util/logging"
 )
 
 // const

@@ -27,13 +27,13 @@ Mainnet is released, please check [here](https://github.com/nebulasio/wiki/blob/
 
 ```bash
 cd $GOPATH/src
-go get -u -v github.com/nebulasio/go-nebulas
+go get -u -v github.com/alexlisong/go-nebulas
 ```
 
 The project is under active development. Its default branch is _develop_.
 
 ```bash
-cd github.com/nebulasio/go-nebulas
+cd github.com/alexlisong/go-nebulas
 ```
 
 New users may want to checkout and use the stable mainnet release in __master__.
@@ -162,7 +162,7 @@ From the log, we can see the binary execution starts neblet, starts network serv
   #     - '8888'
   #     - '8086'
   #   volumes:
-  #     - .:/go/src/github.com/nebulasio/go-nebulas
+  #     - .:/go/src/github.com/alexlisong/go-nebulas
   #   environment:
   #     - TZ=Asia/Shanghai
   #     - NEBULAS_BRANCH=master
