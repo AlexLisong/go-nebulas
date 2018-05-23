@@ -31,7 +31,6 @@ import (
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/alexlisong/go-nebulas/core"
-	metrics "github.com/alexlisong/go-nebulas/metrics"
 	"github.com/alexlisong/go-nebulas/net"
 	"github.com/alexlisong/go-nebulas/util/byteutils"
 	"github.com/alexlisong/go-nebulas/util/logging"
@@ -58,12 +57,6 @@ var (
 	ErrAppendNewBlockFailed       = errors.New("failed to append new block to real chain")
 )
 
-// Metrics
-var (
-	metricsBlockPackingTime = metrics.NewGauge("neb.block.packing")
-	metricsBlockWaitingTime = metrics.NewGauge("neb.block.waiting")
-	metricsLruPoolSlotBlock = metrics.NewGauge("neb.block.lru.poolslot")
-)
 
 // Dpos Delegate Proof-of-Stake
 type Dpos struct {
@@ -542,8 +535,6 @@ func (dpos *Dpos) pushAndBroadcast(tail *core.Block, block *core.Block) error {
 }
 
 func (dpos *Dpos) mintBlock(now int64) error {
-	metricsBlockPackingTime.Update(0)
-	metricsBlockWaitingTime.Update(0)
 
 	nowInMs := now * SecondInMs
 	// check mining enable
@@ -579,7 +570,6 @@ func (dpos *Dpos) mintBlock(now int64) error {
 		"expected": consensusState.Proposer().Hex(),
 		"actual":   miner,
 	}).Info("My turn to mint block")
-	metricsBlockPackingTime.Update(deadlineInMs - nowInMs)
 
 	block, err := dpos.newBlock(tail, consensusState, deadlineInMs)
 	if err != nil {
@@ -591,7 +581,6 @@ func (dpos *Dpos) mintBlock(now int64) error {
 	if slotInMs > currentInMs {
 		timer := time.NewTimer(time.Duration(slotInMs-currentInMs) * time.Millisecond).C
 		<-timer
-		metricsBlockWaitingTime.Update(slotInMs - currentInMs)
 	}
 
 	logging.CLog().WithFields(logrus.Fields{
@@ -621,7 +610,6 @@ func (dpos *Dpos) blockLoop() {
 	for { // ToRefine: change loop logic, try more times second
 		select {
 		case now := <-timeChan:
-			metricsLruPoolSlotBlock.Update(int64(dpos.slot.Len()))
 			dpos.mintBlock(now.Unix())
 		case <-dpos.quitCh:
 			logging.CLog().Info("Stopped Dpos Mining.")

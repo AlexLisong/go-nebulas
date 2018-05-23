@@ -66,7 +66,6 @@ func (s *AdminService) UnlockAccount(ctx context.Context, req *rpcpb.UnlockAccou
 
 	addr, err := core.AddressParse(req.Address)
 	if err != nil {
-		metricsUnlockFailed.Mark(1)
 		return nil, err
 	}
 
@@ -76,11 +75,9 @@ func (s *AdminService) UnlockAccount(ctx context.Context, req *rpcpb.UnlockAccou
 	}
 	err = neb.AccountManager().Unlock(addr, []byte(req.Passphrase), duration)
 	if err != nil {
-		metricsUnlockFailed.Mark(1)
 		return nil, err
 	}
 
-	metricsUnlockSuccess.Mark(1)
 	return &rpcpb.UnlockAccountResponse{Result: true}, nil
 }
 
@@ -106,11 +103,9 @@ func (s *AdminService) SendTransaction(ctx context.Context, req *rpcpb.Transacti
 	neb := s.server.Neblet()
 	tx, err := parseTransaction(neb, req)
 	if err != nil {
-		metricsSendTxFailed.Mark(1)
 		return nil, err
 	}
 	if err := neb.AccountManager().SignTransaction(tx.From(), tx); err != nil {
-		metricsSendTxFailed.Mark(1)
 		return nil, err
 	}
 
@@ -142,25 +137,20 @@ func (s *AdminService) SignTransactionWithPassphrase(ctx context.Context, req *r
 	neb := s.server.Neblet()
 	tx, err := parseTransaction(neb, req.Transaction)
 	if err != nil {
-		metricsSignTxFailed.Mark(1)
 		return nil, err
 	}
 	if err := neb.AccountManager().SignTransactionWithPassphrase(tx.From(), tx, []byte(req.Passphrase)); err != nil {
-		metricsSignTxFailed.Mark(1)
 		return nil, err
 	}
 	pbMsg, err := tx.ToProto()
 	if err != nil {
-		metricsSignTxFailed.Mark(1)
 		return nil, err
 	}
 	data, err := proto.Marshal(pbMsg)
 	if err != nil {
-		metricsSignTxFailed.Mark(1)
 		return nil, err
 	}
 
-	metricsSignTxSuccess.Mark(1)
 	return &rpcpb.SignTransactionPassphraseResponse{Data: data}, nil
 }
 

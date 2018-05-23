@@ -151,16 +151,10 @@ func (pool *TransactionPool) loop() {
 		"size": pool.size,
 	}).Info("Started TransactionPool.")
 
-	metricsUpdateChan := time.NewTicker(metricUpdateInterval).C
 	evictChan := time.NewTicker(txEvictInterval).C
 
 	for {
 		select {
-		case <-metricsUpdateChan:
-			metricsReceivedTx.Update(int64(len(pool.receivedMessageCh)))
-			metricsCachedTx.Update(int64(len(pool.all)))
-			metricsBucketTx.Update(int64(len(pool.buckets)))
-			metricsCandidates.Update(int64(pool.candidates.Len()))
 
 		case <-evictChan:
 			pool.evictExpiredTransactions()
@@ -280,29 +274,24 @@ func (pool *TransactionPool) Push(tx *Transaction) error {
 
 	// verify non-dup tx
 	if _, ok := pool.all[tx.hash.Hex()]; ok {
-		metricsDuplicateTx.Inc(1)
 		return ErrDuplicatedTransaction
 	} // ToRefine: refine the lock scope
 
 	// if tx's gasPrice below the pool config lowest gasPrice, return ErrBelowGasPrice
 	if tx.gasPrice.Cmp(pool.minGasPrice) < 0 {
-		metricsTxPoolBelowGasPrice.Inc(1)
 		return ErrBelowGasPrice
 	}
 
 	if tx.gasLimit.Cmp(util.NewUint128()) <= 0 {
-		metricsTxPoolGasLimitLessOrEqualToZero.Inc(1)
 		return ErrGasLimitLessOrEqualToZero
 	}
 
 	if tx.gasLimit.Cmp(pool.maxGasLimit) > 0 {
-		metricsTxPoolOutOfGasLimit.Inc(1)
 		return ErrOutOfGasLimit
 	}
 
 	// verify hash & sign of tx
 	if err := tx.VerifyIntegrity(pool.bc.chainID); err != nil {
-		metricsInvalidTx.Inc(1)
 		return err
 	}
 

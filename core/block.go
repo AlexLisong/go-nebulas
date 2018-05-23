@@ -416,7 +416,6 @@ func (block *Block) ReturnTransactions() {
 
 // CollectTransactions and add them to block.
 func (block *Block) CollectTransactions(deadlineInMs int64) {
-	metricsBlockPackTxTime.Update(0)
 	if block.sealed {
 		logging.VLog().WithFields(logrus.Fields{
 			"block": block,
@@ -428,7 +427,6 @@ func (block *Block) CollectTransactions(deadlineInMs int64) {
 	logging.VLog().WithFields(logrus.Fields{
 		"elapse": elapseInMs,
 	}).Info("Time to pack txs.")
-	metricsBlockPackTxTime.Update(elapseInMs)
 	if elapseInMs <= 0 {
 		return
 	}
@@ -747,10 +745,6 @@ func (block *Block) Seal() error {
 		"block": block,
 	}).Info("Sealed Block.")
 
-	metricsTxPackedCount.Update(0)
-	metricsTxUnpackedCount.Update(0)
-	metricsTxGivebackCount.Update(0)
-
 	return nil
 }
 
@@ -813,7 +807,6 @@ func (block *Block) VerifyExecution() error {
 // VerifyIntegrity verify block's hash, txs' integrity and consensus acceptable.
 func (block *Block) VerifyIntegrity(chainID uint32, consensus Consensus) error {
 	if consensus == nil {
-		metricsInvalidBlock.Inc(1)
 		return ErrNilArgument
 	}
 
@@ -823,7 +816,6 @@ func (block *Block) VerifyIntegrity(chainID uint32, consensus Consensus) error {
 			"expect": chainID,
 			"actual": block.header.chainID,
 		}).Debug("Failed to check chainid.")
-		metricsInvalidBlock.Inc(1)
 		return ErrInvalidChainID
 	}
 
@@ -834,7 +826,6 @@ func (block *Block) VerifyIntegrity(chainID uint32, consensus Consensus) error {
 				"tx":  tx,
 				"err": err,
 			}).Debug("Failed to verify tx's integrity.")
-			metricsInvalidBlock.Inc(1)
 			return err
 		}
 	}
@@ -850,7 +841,6 @@ func (block *Block) VerifyIntegrity(chainID uint32, consensus Consensus) error {
 			"actual": block.Hash(),
 			"err":    err,
 		}).Debug("Failed to check block's hash.")
-		metricsInvalidBlock.Inc(1)
 		return ErrInvalidBlockHash
 	}
 
@@ -860,7 +850,6 @@ func (block *Block) VerifyIntegrity(chainID uint32, consensus Consensus) error {
 			"block": block,
 			"err":   err,
 		}).Debug("Failed to verify block.")
-		metricsInvalidBlock.Inc(1)
 		return err
 	}
 
@@ -914,7 +903,6 @@ type verifyCtx struct {
 
 // Execute block and return result.
 func (block *Block) execute() error {
-	startAt := time.Now().UnixNano()
 
 	if err := block.rewardCoinbaseForMint(); err != nil {
 		return err
@@ -934,7 +922,6 @@ func (block *Block) execute() error {
 			return ErrInvalidDagBlock
 		}
 		tx := block.transactions[idx]
-		metricsTxExecute.Mark(1)
 
 		mergeCh <- true
 		txWorldState, err := block.WorldState().Prepare(tx.Hash().String())
@@ -957,7 +944,6 @@ func (block *Block) execute() error {
 		return nil
 	})
 
-	start := time.Now().UnixNano()
 	if err := dispatcher.Run(); err != nil {
 		transactions := []string{}
 		for k, tx := range block.transactions {
@@ -971,13 +957,6 @@ func (block *Block) execute() error {
 		}).Debug("Failed to verify txs in block.")
 		return err
 	}
-	end := time.Now().UnixNano()
-
-	if len(block.transactions) != 0 {
-		metricsTxVerifiedTime.Update((end - start) / int64(len(block.transactions)))
-	} else {
-		metricsTxVerifiedTime.Update(0)
-	}
 
 	if err := block.rewardCoinbaseForGas(); err != nil {
 		return err
@@ -986,9 +965,6 @@ func (block *Block) execute() error {
 		return err
 	}
 
-	endAt := time.Now().UnixNano()
-	metricsBlockVerifiedTime.Update(endAt - startAt)
-	metricsTxsInBlock.Update(int64(len(block.transactions)))
 
 	return nil
 }

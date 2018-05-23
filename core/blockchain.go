@@ -219,8 +219,6 @@ func (bc *BlockChain) loop() {
 			return
 		case <-timerChan:
 			bc.ConsensusHandler().UpdateLIB()
-			metricsLruCacheBlock.Update(int64(bc.cachedBlocks.Len()))
-			metricsLruTailBlock.Update(int64(bc.detachedTailBlocks.Len()))
 		}
 	}
 }
@@ -324,10 +322,6 @@ func (bc *BlockChain) revertBlocks(from *Block, to *Block) error {
 	}
 	go bc.triggerRevertBlockEvent(blocks)
 	// record count of reverted blocks
-	if revertTimes > 0 {
-		metricsBlockRevertTimesGauge.Update(revertTimes)
-		metricsBlockRevertMeter.Mark(1)
-	}
 	return nil
 }
 
@@ -417,9 +411,6 @@ func (bc *BlockChain) SetTailBlock(newTail *Block) error {
 	logging.CLog().WithFields(logrus.Fields{
 		"tail": newTail,
 	}).Info("Succeed to update new tail.")
-
-	metricsBlockHeightGauge.Update(int64(newTail.Height()))
-	metricsBlocktailHashGauge.Update(int64(byteutils.HashBytes(newTail.Hash())))
 
 	return nil
 }
@@ -579,10 +570,6 @@ func (bc *BlockChain) putVerifiedNewBlocks(parent *Block, allBlocks, tailBlocks 
 			"block": v,
 		}).Info("Accepted the new block on chain")
 
-		metricsBlockOnchainTimer.Update(time.Duration(time.Now().Unix() - v.Timestamp()))
-		for _, tx := range v.transactions {
-			metricsTxOnchainTimer.Update(time.Duration(time.Now().Unix() - tx.Timestamp()))
-		}
 	}
 	for _, v := range tailBlocks {
 		bc.detachedTailBlocks.Add(v.Hash().Hex(), v)

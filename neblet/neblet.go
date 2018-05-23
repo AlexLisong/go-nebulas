@@ -23,7 +23,6 @@ import (
 	"github.com/alexlisong/go-nebulas/consensus/dpos"
 	"github.com/alexlisong/go-nebulas/core"
 	"github.com/alexlisong/go-nebulas/core/pb"
-	"github.com/alexlisong/go-nebulas/metrics"
 	"github.com/alexlisong/go-nebulas/neblet/pb"
 	nebnet "github.com/alexlisong/go-nebulas/net"
 	"github.com/alexlisong/go-nebulas/rpc"
@@ -198,9 +197,6 @@ func (n *Neblet) Start() {
 	}
 	n.running = true
 
-	if n.config.Stats.EnableMetrics {
-		metrics.Start(n)
-	}
 
 	if err := n.netService.Start(); err != nil {
 		logging.CLog().WithFields(logrus.Fields{
@@ -304,9 +300,6 @@ func (n *Neblet) Stop() {
 		n.netService = nil
 	}
 
-	if n.config.Stats.EnableMetrics {
-		metrics.Stop()
-	}
 
 	n.accountManager = nil
 

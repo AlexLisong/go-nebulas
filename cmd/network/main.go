@@ -29,7 +29,6 @@ import (
 	"time"
 
 	"github.com/libp2p/go-libp2p-interface-conn"
-	"github.com/alexlisong/go-nebulas/metrics"
 	"github.com/alexlisong/go-nebulas/neblet"
 	"github.com/alexlisong/go-nebulas/net"
 	"github.com/alexlisong/go-nebulas/util/byteutils"
