@@ -123,11 +123,6 @@ func run(mode, configPath string, packageSize, concurrentMessageCount, totalMess
 	// start server.
 	netService.Start()
 
-	// metrics.
-	tps := metrics.NewMeter("tps")
-	throughput := metrics.NewMeter("throughput")
-	latency := metrics.NewHistogramWithUniformSample("latency", 100)
-
 	sentMessageCount := int64(0)
 
 	// first trigger.
@@ -141,7 +136,6 @@ func run(mode, configPath string, packageSize, concurrentMessageCount, totalMess
 		}()
 	}
 
-	ticker := time.NewTicker(5 * time.Second)
 
 	for {
 		select {
@@ -149,28 +143,8 @@ func run(mode, configPath string, packageSize, concurrentMessageCount, totalMess
 			messageName := message.MessageType()
 			switch messageName {
 			case PingMessage:
-				data := message.Data()
-				sendAt := ParseData(data)
-				nowAt := time.Now().UnixNano()
-
-				latencyVal := (nowAt - sendAt) / int64(1000000)
-
-				// metrics.
-				tps.Mark(1)
-				throughput.Mark(1 * int64(net.NebMessageHeaderLength+len(data)))
-				latency.Update(latencyVal)
-
 				netService.SendMessageToPeer(PongMessage, message.Data(), net.MessagePriorityNormal, message.MessageFrom())
 			case PongMessage:
-				data := message.Data()
-				sendAt := ParseData(data)
-				nowAt := time.Now().UnixNano()
-				latencyVal := (nowAt - sendAt) / int64(1000000)
-
-				// metrics.
-				tps.Mark(1)
-				throughput.Mark(1 * int64(net.NebMessageHeaderLength+len(data)))
-				latency.Update(latencyVal)
 
 				sentMessageCount++
 				if totalMessageCount > 0 && sentMessageCount >= totalMessageCount {
@@ -179,8 +153,6 @@ func run(mode, configPath string, packageSize, concurrentMessageCount, totalMess
 
 				netService.SendMessageToPeer(PingMessage, GenerateData(packageSize), net.MessagePriorityNormal, message.MessageFrom())
 			}
-		case <-ticker.C:
-			fmt.Printf("[Perf] tps: %6.2f/s; throughput: %6.2fk/s; latency p95: %6.2f\n", tps.Rate1(), throughput.Rate1()/1000, latency.Percentile(float64(0.50)))
 		}
 	}
 }

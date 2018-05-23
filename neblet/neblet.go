@@ -29,7 +29,6 @@ import (
 	"github.com/alexlisong/go-nebulas/storage"
 	nsync "github.com/alexlisong/go-nebulas/sync"
 	"github.com/alexlisong/go-nebulas/util/logging"
-	m "github.com/rcrowley/go-metrics"
 )
 
 var (
@@ -40,9 +39,6 @@ var (
 	ErrIncompatibleStorageSchemeVersion = errors.New("incompatible storage schema version, pls migrate your storage")
 )
 
-var (
-	metricsNebstartGauge = m.GetOrRegisterGauge("neb.start", nil)
-)
 
 // Neblet manages ldife cycle of blockchain services.
 type Neblet struct {
@@ -252,8 +248,6 @@ func (n *Neblet) Start() {
 			n.Consensus().ResumeMining()
 		}
 	}
-
-	metricsNebstartGauge.Update(1)
 
 	logging.CLog().Info("Started Neblet.")
 }
