@@ -20,10 +20,8 @@ package core
 
 import (
 	"sync"
-	"time"
-
 	"github.com/gogo/protobuf/proto"
-	lru "github.com/hashicorp/golang-lru"
+	"github.com/hashicorp/golang-lru"
 	"github.com/alexlisong/go-nebulas/core/pb"
 	"github.com/alexlisong/go-nebulas/net"
 
@@ -235,13 +233,9 @@ func (pool *BlockPool) handleParentDownloadRequest(msg net.Message) {
 
 func (pool *BlockPool) loop() {
 	logging.CLog().Info("Started BlockPool.")
-	timerChan := time.NewTicker(time.Second).C
 	for {
 		select {
-		case <-timerChan:
-			metricsCachedNewBlock.Update(int64(len(pool.receiveBlockMessageCh)))
-			metricsCachedDownloadBlock.Update(int64(len(pool.receiveDownloadBlockMessageCh)))
-			metricsLruPoolCacheBlock.Update(int64(pool.cache.Len()))
+
 		case <-pool.quitCh:
 			logging.CLog().Info("Stopped BlockPool.")
 			return
@@ -350,7 +344,6 @@ func (pool *BlockPool) push(sender string, block *Block) error {
 	// verify non-dup block
 	if pool.cache.Contains(block.Hash().Hex()) ||
 		pool.bc.GetBlock(block.Hash()) != nil {
-		metricsDuplicatedBlock.Inc(1)
 		logging.VLog().WithFields(logrus.Fields{
 			"block": block,
 		}).Debug("Found duplicated block.")
@@ -359,7 +352,6 @@ func (pool *BlockPool) push(sender string, block *Block) error {
 
 	// verify block integrity
 	if err := block.VerifyIntegrity(pool.bc.chainID, pool.bc.ConsensusHandler()); err != nil {
-		metricsInvalidBlock.Inc(1)
 		logging.VLog().WithFields(logrus.Fields{
 			"block": block,
 			"err":   err,

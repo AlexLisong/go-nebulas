@@ -72,7 +72,6 @@ func (s *APIService) GetAccountState(ctx context.Context, req *rpcpb.GetAccountS
 
 	addr, err := core.AddressParse(req.Address)
 	if err != nil {
-		metricsAccountStateFailed.Mark(1)
 		return nil, err
 	}
 
@@ -80,7 +79,6 @@ func (s *APIService) GetAccountState(ctx context.Context, req *rpcpb.GetAccountS
 	if req.Height > 0 {
 		block = neb.BlockChain().GetBlockOnCanonicalChainByHeight(req.Height)
 		if block == nil {
-			metricsAccountStateFailed.Mark(1)
 			return nil, errors.New("block not found")
 		}
 	}
@@ -90,7 +88,6 @@ func (s *APIService) GetAccountState(ctx context.Context, req *rpcpb.GetAccountS
 		return nil, err
 	}
 
-	metricsAccountStateSuccess.Mark(1)
 	return &rpcpb.GetAccountStateResponse{Balance: acc.Balance().String(), Nonce: acc.Nonce(), Type: uint32(addr.Type())}, nil
 }
 
@@ -185,11 +182,7 @@ func parseTransaction(neb core.Neblet, reqTx *rpcpb.TransactionRequest) (*core.T
 
 func handleTransactionResponse(neb core.Neblet, tx *core.Transaction) (resp *rpcpb.SendTransactionResponse, err error) {
 	defer func() {
-		if err != nil {
-			metricsSendTxFailed.Mark(1)
-		} else {
-			metricsSendTxSuccess.Mark(1)
-		}
+
 	}()
 
 	err = tx.VerifyIntegrity(neb.BlockChain().ChainID())
@@ -242,12 +235,10 @@ func (s *APIService) SendRawTransaction(ctx context.Context, req *rpcpb.SendRawT
 
 	pbTx := new(corepb.Transaction)
 	if err := proto.Unmarshal(req.GetData(), pbTx); err != nil {
-		metricsSendTxFailed.Mark(1)
 		return nil, err
 	}
 	tx := new(core.Transaction)
 	if err := tx.FromProto(pbTx); err != nil {
-		metricsSendTxFailed.Mark(1)
 		return nil, err
 	}
 

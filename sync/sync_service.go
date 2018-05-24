@@ -21,8 +21,6 @@ package sync
 import (
 	"errors"
 	"sync"
-	"time"
-
 	"github.com/alexlisong/go-nebulas/util/byteutils"
 
 	"github.com/gogo/protobuf/proto"
@@ -147,12 +145,9 @@ func (ss *Service) WaitingForFinish() {
 
 func (ss *Service) startLoop() {
 	logging.CLog().Info("Started Sync Service.")
-	timerChan := time.NewTicker(time.Second).C
 
 	for {
 		select {
-		case <-timerChan:
-			metricsCachedSync.Update(int64(len(ss.messageCh)))
 		case <-ss.quitCh:
 			if ss.activeTask != nil {
 				ss.activeTask.Stop()

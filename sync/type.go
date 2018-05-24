@@ -21,7 +21,6 @@ package sync
 import (
 	"errors"
 
-	"github.com/alexlisong/go-nebulas/metrics"
 )
 
 // Error Types
@@ -41,9 +40,4 @@ const (
 	MaxChunkPerSyncRequest       = 10
 	ConcurrentSyncChunkDataCount = 10
 	GetChunkDataTimeout          = 10 // 10s.
-)
-
-// Metrics
-var (
-	metricsCachedSync = metrics.NewGauge("neb.sync.cached")
 )

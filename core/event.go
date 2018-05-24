@@ -21,8 +21,6 @@ package core
 import (
 	"sync"
 
-	"time"
-
 	"github.com/alexlisong/go-nebulas/core/state"
 	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
@@ -137,11 +135,8 @@ func (emitter *EventEmitter) Deregister(subscribers ...*EventSubscriber) {
 func (emitter *EventEmitter) loop() {
 	logging.CLog().Info("Started EventEmitter.")
 
-	timerChan := time.NewTicker(time.Second).C
 	for {
 		select {
-		case <-timerChan:
-			metricsCachedEvent.Update(int64(len(emitter.eventCh)))
 		case <-emitter.quitCh:
 			logging.CLog().Info("Stopped EventEmitter.")
 			return

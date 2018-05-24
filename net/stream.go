@@ -180,8 +180,6 @@ func (s *Stream) SendMessage(messageName string, data []byte, priority int) erro
 		return err
 	}
 
-	// metrics.
-	metricsPacketsOutByMessageName(messageName, message.Length())
 
 	// send to pool.
 	message.FlagSendMessageAt()
@@ -234,7 +232,7 @@ func (s *Stream) Write(data []byte) error {
 	if err := s.stream.SetWriteDeadline(deadline); err != nil {
 		return err
 	}
-	n, err := s.stream.Write(data)
+	_, err := s.stream.Write(data)
 	if err != nil {
 		logging.VLog().WithFields(logrus.Fields{
 			"err":    err,
@@ -245,17 +243,12 @@ func (s *Stream) Write(data []byte) error {
 	}
 	s.latestWriteAt = time.Now().Unix()
 
-	// metrics.
-	metricsPacketsOut.Mark(1)
-	metricsBytesOut.Mark(int64(n))
 
 	return nil
 }
 
 // WriteNebMessage write neb msg in the stream
 func (s *Stream) WriteNebMessage(message *NebMessage) error {
-	// metrics.
-	metricsPacketsOutByMessageName(message.MessageName(), message.Length())
 
 	err := s.Write(message.Content())
 	message.FlagWriteMessageAt()
@@ -372,11 +365,6 @@ func (s *Stream) readLoop() {
 
 			// remove data from buffer.
 			messageBuffer = messageBuffer[message.DataLength():]
-
-			// metrics.
-			metricsPacketsIn.Mark(1)
-			metricsBytesIn.Mark(int64(message.Length()))
-			metricsPacketsInByMessageName(message.MessageName(), message.Length())
 
 			// handle message.
 			if err := s.handleMessage(message); err == ErrShouldCloseConnectionAndExitLoop {

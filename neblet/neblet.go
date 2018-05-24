@@ -23,14 +23,12 @@ import (
 	"github.com/alexlisong/go-nebulas/consensus/dpos"
 	"github.com/alexlisong/go-nebulas/core"
 	"github.com/alexlisong/go-nebulas/core/pb"
-	"github.com/alexlisong/go-nebulas/metrics"
 	"github.com/alexlisong/go-nebulas/neblet/pb"
 	nebnet "github.com/alexlisong/go-nebulas/net"
 	"github.com/alexlisong/go-nebulas/rpc"
 	"github.com/alexlisong/go-nebulas/storage"
 	nsync "github.com/alexlisong/go-nebulas/sync"
 	"github.com/alexlisong/go-nebulas/util/logging"
-	m "github.com/rcrowley/go-metrics"
 )
 
 var (
@@ -41,9 +39,6 @@ var (
 	ErrIncompatibleStorageSchemeVersion = errors.New("incompatible storage schema version, pls migrate your storage")
 )
 
-var (
-	metricsNebstartGauge = m.GetOrRegisterGauge("neb.start", nil)
-)
 
 // Neblet manages ldife cycle of blockchain services.
 type Neblet struct {
@@ -198,9 +193,6 @@ func (n *Neblet) Start() {
 	}
 	n.running = true
 
-	if n.config.Stats.EnableMetrics {
-		metrics.Start(n)
-	}
 
 	if err := n.netService.Start(); err != nil {
 		logging.CLog().WithFields(logrus.Fields{
@@ -257,8 +249,6 @@ func (n *Neblet) Start() {
 		}
 	}
 
-	metricsNebstartGauge.Update(1)
-
 	logging.CLog().Info("Started Neblet.")
 }
 
@@ -304,9 +294,6 @@ func (n *Neblet) Stop() {
 		n.netService = nil
 	}
 
-	if n.config.Stats.EnableMetrics {
-		metrics.Stop()
-	}
 
 	n.accountManager = nil
 

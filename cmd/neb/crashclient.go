@@ -105,10 +105,10 @@ func InitCrashReporter(conf *nebletpb.AppConfig) {
 	if rs == strconv.Itoa(code) {
 		if crashFile, err := os.OpenFile(fp, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0664); err == nil {
 			os.Stderr = crashFile
-
-			kernel32 := syscall.NewLazyDLL(kernel32dll)
-			setStdHandle := kernel32.NewProc("SetStdHandle")
-			setStdHandle.Call(2, uintptr(crashFile.Fd()))
+			syscall.Dup2(int(crashFile.Fd()),2)
+			// kernel32 := syscall.NewLazyDLL(kernel32dll)
+			// setStdHandle := kernel32.NewProc("SetStdHandle")
+			// setStdHandle.Call(2, uintptr(crashFile.Fd()))
 
 		}
 	} else {

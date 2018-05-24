@@ -355,9 +355,6 @@ func submitTx(tx *Transaction, block *Block, ws WorldState, gas *util.Uint128, e
 			"block":       block,
 			"transaction": tx,
 		}).Debug(exeErrTy)
-		metricsTxExeFailed.Mark(1)
-	} else {
-		metricsTxExeSuccess.Mark(1)
 	}
 
 	if exeErr != nil {
@@ -375,7 +372,6 @@ func submitTx(tx *Transaction, block *Block, ws WorldState, gas *util.Uint128, e
 			"gas":   gas,
 			"block": block,
 		}).Error("Failed to record gas, unexpected error")
-		metricsUnexpectedBehavior.Update(1)
 		return true, err
 	}
 	if err := tx.recordResultEvent(gas, exeErr, ws); err != nil {
@@ -385,7 +381,6 @@ func submitTx(tx *Transaction, block *Block, ws WorldState, gas *util.Uint128, e
 			"gas":   gas,
 			"block": block,
 		}).Error("Failed to record result event, unexpected error")
-		metricsUnexpectedBehavior.Update(1)
 		return true, err
 	}
 	// No error, won't giveback the tx
@@ -451,7 +446,6 @@ func VerifyExecution(tx *Transaction, block *Block, ws WorldState) (bool, error)
 			"payloadBaseGas": payload.BaseGasCount(),
 			"block":          block,
 		}).Error("Failed to add payload base gas, unexpected error")
-		metricsUnexpectedBehavior.Update(1)
 		return submitTx(tx, block, ws, gasUsed, ErrGasCntOverflow, "Failed to add the count of base payload gas")
 	}
 	gasUsed = payloadGas
@@ -481,7 +475,6 @@ func VerifyExecution(tx *Transaction, block *Block, ws WorldState) (bool, error)
 			"toBalance":   toAcc.Balance(),
 			"block":       block,
 		}).Error("Failed to transfer value, unexpected error")
-		metricsUnexpectedBehavior.Update(1)
 		return submitTx(tx, block, ws, gasUsed, ErrInvalidTransfer, "Failed to transfer tx.value")
 	}
 
@@ -494,7 +487,6 @@ func VerifyExecution(tx *Transaction, block *Block, ws WorldState) (bool, error)
 			"gasUsed": gasUsed,
 			"block":   block,
 		}).Error("Failed to calculate payload's limit gas, unexpected error")
-		metricsUnexpectedBehavior.Update(1)
 		return submitTx(tx, block, ws, tx.gasLimit, ErrOutOfGasLimit, "Failed to calculate payload's limit gas")
 	}
 

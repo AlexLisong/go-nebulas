@@ -64,7 +64,6 @@ func main() {
 		initCommand,
 		genesisCommand,
 		accountCommand,
-		consoleCommand,
 		networkCommand,
 		versionCommand,
 		licenseCommand,

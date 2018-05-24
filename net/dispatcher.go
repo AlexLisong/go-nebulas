@@ -19,20 +19,12 @@
 package net
 
 import (
-	"fmt"
 	"sync"
-	"time"
-
-	lru "github.com/hashicorp/golang-lru"
-	"github.com/alexlisong/go-nebulas/metrics"
+	"github.com/hashicorp/golang-lru"
 	"github.com/alexlisong/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )
 
-var (
-	metricsDispatcherCached     = metrics.NewGauge("neb.net.dispatcher.cached")
-	metricsDispatcherDuplicated = metrics.NewMeter("neb.net.dispatcher.duplicated")
-)
 
 // Dispatcher a message dispatcher service.
 type Dispatcher struct {
@@ -90,11 +82,9 @@ func (dp *Dispatcher) Start() {
 func (dp *Dispatcher) loop() {
 	logging.CLog().Info("Started NewService Dispatcher.")
 
-	timerChan := time.NewTicker(time.Second).C
 	for {
 		select {
-		case <-timerChan:
-			metricsDispatcherCached.Update(int64(len(dp.receivedMessageCh)))
+
 		case <-dp.quitCh:
 			logging.CLog().Info("Stoped NebService Dispatcher.")
 			return
@@ -132,7 +122,6 @@ func (dp *Dispatcher) PutMessage(msg Message) {
 	if dp.filters[msg.MessageType()] {
 		if exist, _ := dp.dispatchedMessages.ContainsOrAdd(hash, hash); exist == true {
 			// duplicated message, ignore.
-			metricsDuplicatedMessage(msg.MessageType())
 			return
 		}
 	}
@@ -140,8 +129,3 @@ func (dp *Dispatcher) PutMessage(msg Message) {
 	dp.receivedMessageCh <- msg
 }
 
-func metricsDuplicatedMessage(messageName string) {
-	metricsDispatcherDuplicated.Mark(int64(1))
-	meter := metrics.NewMeter(fmt.Sprintf("neb.net.dispatcher.duplicated.%s", messageName))
-	meter.Mark(int64(1))
-}

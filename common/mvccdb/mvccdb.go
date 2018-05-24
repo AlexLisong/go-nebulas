@@ -22,7 +22,6 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/alexlisong/go-nebulas/metrics"
 	"github.com/alexlisong/go-nebulas/storage"
 )
 
@@ -41,7 +40,6 @@ var (
 )
 
 func init() {
-	metrics.EnableMetrics()
 }
 
 /* How to use MVCCDB
