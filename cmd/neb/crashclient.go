@@ -33,6 +33,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+const (
+	kernel32dll = "kernel32.dll"
+)
+
 // InitCrashReporter init crash reporter
 func InitCrashReporter(conf *nebletpb.AppConfig) {
 	os.Setenv("GOBACKTRACE", "crash")
@@ -101,7 +105,11 @@ func InitCrashReporter(conf *nebletpb.AppConfig) {
 	if rs == strconv.Itoa(code) {
 		if crashFile, err := os.OpenFile(fp, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0664); err == nil {
 			os.Stderr = crashFile
-			syscall.Dup2(int(crashFile.Fd()), 2)
+			syscall.Dup2(int(crashFile.Fd()),2)
+			// kernel32 := syscall.NewLazyDLL(kernel32dll)
+			// setStdHandle := kernel32.NewProc("SetStdHandle")
+			// setStdHandle.Call(2, uintptr(crashFile.Fd()))
+
 		}
 	} else {
 		logging.CLog().WithFields(logrus.Fields{
