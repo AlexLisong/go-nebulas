@@ -157,10 +157,6 @@ func run(mode, configPath string, packageSize, concurrentMessageCount, totalMess
 	}
 }
 
-// ParseData parse int64 from bytes
-func ParseData(data []byte) int64 {
-	return byteutils.Int64(data)
-}
 
 // GenerateData convert int64 into bytes
 func GenerateData(packageSize int64) []byte {
