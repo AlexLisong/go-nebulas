@@ -327,23 +327,6 @@ func appConfig(ctx *cli.Context, cfg *nebletpb.AppConfig) {
 	}
 }
 
-func statsConfig(ctx *cli.Context, cfg *nebletpb.StatsConfig) {
-	if ctx.GlobalIsSet(StatsEnableFlag.Name) {
-		cfg.EnableMetrics = ctx.GlobalBool(StatsEnableFlag.Name)
-	}
-	if ctx.GlobalIsSet(StatsDBHostFlag.Name) {
-		cfg.Influxdb.Host = ctx.GlobalString(StatsDBHostFlag.Name)
-	}
-	if ctx.GlobalIsSet(StatsDBNameFlag.Name) {
-		cfg.Influxdb.Db = ctx.GlobalString(StatsDBNameFlag.Name)
-	}
-	if ctx.GlobalIsSet(StatsDBUserFlag.Name) {
-		cfg.Influxdb.User = ctx.GlobalString(StatsDBUserFlag.Name)
-	}
-	if ctx.GlobalIsSet(StatsDBPasswordFlag.Name) {
-		cfg.Influxdb.Password = ctx.GlobalString(StatsDBPasswordFlag.Name)
-	}
-}
 
 // MergeFlags sets the global flag from a local flag when it's set.
 func MergeFlags(action func(ctx *cli.Context) error) func(*cli.Context) error {
