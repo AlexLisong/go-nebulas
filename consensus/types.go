@@ -46,18 +46,3 @@ type BaseEvent struct {
 	eventType EventType
 	data      interface{}
 }
-
-// NewBaseEvent creates an event
-func NewBaseEvent(t EventType, data interface{}) Event {
-	return &BaseEvent{eventType: t, data: data}
-}
-
-// EventType of an event instance
-func (e *BaseEvent) EventType() EventType {
-	return e.eventType
-}
-
-// Data of an event instance
-func (e *BaseEvent) Data() interface{} {
-	return e.data
-}

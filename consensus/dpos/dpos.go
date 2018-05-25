@@ -617,22 +617,3 @@ func (dpos *Dpos) blockLoop() {
 		}
 	}
 }
-
-func (dpos *Dpos) findProposer(now int64) (proposer byteutils.Hash, err error) {
-	miners, err := dpos.chain.TailBlock().WorldState().Dynasty()
-	if err != nil {
-		logging.VLog().WithFields(logrus.Fields{
-			"err": err,
-		}).Debug("Failed to get miners from dynasty.")
-		return nil, err
-	}
-	proposer, err = FindProposer(now, miners)
-	if err != nil {
-		logging.VLog().WithFields(logrus.Fields{
-			"proposer": proposer,
-			"err":      err,
-		}).Debug("Failed to find proposer.")
-		return nil, err
-	}
-	return proposer, nil
-}
